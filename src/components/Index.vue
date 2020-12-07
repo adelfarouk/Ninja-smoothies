@@ -17,14 +17,13 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
+
 export default {
     name: 'index',
     data () {
         return {
-            smoothies: [
-                { title: 'Ninja Brew', slug: 'ninja-brew', ingredients: ['banana', 'coffee', 'milk'], id: '1'},
-                { title: 'Morning Mood', slug: 'morning-mood', ingredients: ['mango', 'lime', 'juice'], id: '2'}
-            ]
+            smoothies: []
         }
     },
     methods: {
@@ -46,6 +45,31 @@ export default {
 - the problem here with array_as_database is the deleted items back again when refresh the page
   but i don't want this, so we need (firebase)
 - create new-project in (firebase) easily, down to (admin-panel)
+
+- we connect to (firebase) by making firebase_dir inside (src):
+ - init.js: contain firebase_variable from firebase_project to configure App
+ - install (firebase) by (npm): $ npm install firebase@4.13   [version of course]
+ - may need (--save), if i don't have (npm_version) which save automatically
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCHlwR0Hgbngfb3L48totQGnOq_mJCN_iQ",
+    authDomain: "vue-firestore-34145.firebaseapp.com",
+    projectId: "vue-firestore-34145",
+    storageBucket: "vue-firestore-34145.appspot.com",
+    messagingSenderId: "128538759283",
+    appId: "1:128538759283:web:af521ec2a32cfca3235a06"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
 
 */
