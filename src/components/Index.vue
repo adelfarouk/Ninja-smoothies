@@ -27,11 +27,11 @@ export default {
         }
     },
     methods: {
-        deleteSmoothie(id) {
-            this.smoothies = this.smoothies.filter(smoothie => {
-                return smoothie.id !== id
-            })
-        }
+        // deleteSmoothie(id) {
+        //     this.smoothies = this.smoothies.filter(smoothie => {
+        //         return smoothie.id !== id
+        //     })
+        // }
     }
 }
 
