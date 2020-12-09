@@ -17,13 +17,16 @@
 </template>
 
 <script>
-import db from '@/firebase/init'
+// import db from '@/firebase/init'
 
 export default {
     name: 'index',
     data () {
         return {
-            smoothies: []
+            smoothies: [
+                {title: 'Morning Brew', ingredients: ['milk', 'orange'], id: '1'},
+                {title: 'Coffee', ingredients: ['coffee', 'water'], id: '2'}
+            ]
         }
     },
     methods: {
@@ -35,6 +38,36 @@ export default {
     }
 }
 
+
+
+
+</script>
+
+<style>
+.index {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    margin-top: 60px;
+}
+.index h2 {
+    font-size: 1.8em;
+    text-align: center;
+    margin-top: 0;
+}
+.index .ingredients {
+    margin: 30px auto;
+}
+.index .ingredients li {
+    display: inline-block;
+}
+.delete {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    color: #aaa;
+    cursor: pointer;
+}
 
 /*
 - slug: will use as (URL)version of (title)
@@ -73,32 +106,4 @@ export default {
 
 
 */
-
-</script>
-
-<style>
-.index {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
-    margin-top: 60px;
-}
-.index h2 {
-    font-size: 1.8em;
-    text-align: center;
-    margin-top: 0;
-}
-.index .ingredients {
-    margin: 30px auto;
-}
-.index .ingredients li {
-    display: inline-block;
-}
-.delete {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    color: #aaa;
-    cursor: pointer;
-}
 </style>
