@@ -2,12 +2,12 @@
     <div class="navbar">
         <nav class="nav-extended indigo darken-2">
             <div class="nav-content">
-                <router-link to="">
+                <router-link :to="{ name: 'Index' }">
                     <span class="nav-title">Ninja Smoothies</span>
                 </router-link>
 
                 <a href="" class="btn-floating btn-large halfway-fab pink">
-                    <router-link to="">
+                    <router-link :to="{ name: 'AddSmoothie' }">
                         <i class="material-icons">add</i>
                     </router-link>
                 </a>
@@ -32,4 +32,9 @@ export default {
 .navbar nav {
     padding: 0 20px;
 }
+
+/*
+- bind (:to) to get path_names from (router/index.js)
+
+ */
 </style>

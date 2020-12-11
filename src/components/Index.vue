@@ -12,6 +12,13 @@
                     </li>
                 </ul>
             </div>
+            
+            <!-- Edit button -->
+            <span class="btn-floating btn-large halfway-fab pink">
+                <router-link :to="{ name: 'EditSmoothie', params: { smoothie_slug: smoothie.slug }}">
+                    <i class="material-icons edit">edit</i>
+                </router-link>
+            </span>
         </div>
     </div>
 </template>
@@ -28,8 +35,11 @@ export default {
     },
     methods: {
         deleteSmoothie(id) {
-            this.smoothies = this.smoothies.filter(smoothie => {
+            db.collection('smoothies').doc(id).delete()
+            .then(() => {
+                this.smoothies = this.smoothies.filter(smoothie => {
                 return smoothie.id !== id
+                })
             })
         }
     },
@@ -37,8 +47,10 @@ export default {
         db.collection('smoothies').get()
         .then(snapshots => {
             snapshots.forEach(doc => {
-                this.smoothies.push(doc.data());
-                this.smoothies.id = doc.id;
+                let smoothie = doc.data()
+                smoothie.id = doc.id
+                this.smoothies.push(smoothie)
+                
             })
         })
     }
@@ -87,29 +99,25 @@ export default {
 
 - we connect to (firebase) by making firebase_dir inside (src):
  - init.js: contain firebase_variable from firebase_project to configure App
- - install (firebase) by (npm): $ npm install firebase@4.13   [version of course]
  - may need (--save), if i don't have (npm_version) which save automatically
 
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCHlwR0Hgbngfb3L48totQGnOq_mJCN_iQ",
-    authDomain: "vue-firestore-34145.firebaseapp.com",
-    projectId: "vue-firestore-34145",
-    storageBucket: "vue-firestore-34145.appspot.com",
-    messagingSenderId: "128538759283",
-    appId: "1:128538759283:web:af521ec2a32cfca3235a06"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-
+- this approach will del item from front first, cz (db) return promise,
+    and take sometimes!
+deleteSmoothie(id) {
+    db.collection('smoothies').doc(id).delete()
+    this.smoothies = this.smoothies.filter(smoothie => {
+        return smoothie.id !== id
+    })
+}
+-> but in better way we can do this:
+deleteSmoothie(id) {
+    db.collection('smoothies').doc(id).delete()
+    .then(() => {
+        this.smoothies = this.smoothies.filter(smoothie => {
+        return smoothie.id !== id
+        })
+})
+- if (firestore) has multiple (documents), he back them in array, so can use (forEach)
+- 
 */
 </style>
