@@ -20,7 +20,7 @@
 
             <div class="field center-align">
                 <p v-if="feedback" class="red-text">{{ feedback }}</p>
-                <button class="btn pink">Add Smoothie</button>
+                <button class="btn pink">update Smoothie</button>
             </div>
         </form>
     </div>
@@ -78,7 +78,7 @@ export default {
     },
     created() {
         let ref = db.collection('smoothies').where('slug', '==', this.$route.params.smoothie_slug)
-        ref.get().then(snapshot => {
+        ref.get().then(snapshot => {  // snapshot is array of objects!
             snapshot.forEach(doc => {
                 this.smoothie = doc.data()
                 this.smoothie.id = doc.id
